@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CoffeeShop</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      body {
+        font-family: "Poppins", sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      .coffee-gradient {
+        background: linear-gradient(135deg, #6f4e37 0%, #c89f63 100%);
+      }
+
+      .hero-pattern {
+        background-color: #f5f5f5;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236f4e37' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      .coffee-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(111, 78, 55, 0.15);
+      }
+
+      .add-to-cart {
+        transition: all 0.3s ease;
+      }
+
+      .add-to-cart:hover {
+        background-color: #6f4e37;
+        color: white;
+      }
+    </style>
+  </head>
+  <body class="bg-[#faf7f2] text-[#5a3921]">
+    <!-- Header & Navbar -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center">
+            <div
+              class="w-10 h-10 rounded-full coffee-gradient flex items-center justify-center text-white mr-2"
+            >
+              <i class="fas fa-coffee"></i>
+            </div>
+            <span class="text-xl font-bold text-[#6f4e37]">CoffeeSruduk</span>
+          </div>
+
+          <nav class="hidden md:flex space-x-8">
+            <a href="#home" class="hover:text-[#c89f63] transition">Home</a>
+            <a href="#menu" class="hover:text-[#c89f63] transition">Menu</a>
+            <a href="#about" class="hover:text-[#c89f63] transition">Tentang</a>
+            <a href="#contact" class="hover:text-[#c89f63] transition"
+              >Kontak</a
+            >
+          </nav>
+
+          <div class="flex items-center space-x-4">
+            <button class="relative" id="cartButton">
+              <i class="fas fa-shopping-cart text-xl text-[#6f4e37]"></i>
+              <span
+                class="absolute -top-2 -right-2 bg-[#c89f63] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                id="cartCount"
+                >0</span
+              >
+            </button>
+
+            <button class="md:hidden" id="mobileMenuButton">
+              <i class="fas fa-bars text-xl text-[#6f4e37]"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden py-4 border-t mt-3" id="mobileMenu">
+          <div class="flex flex-col space-y-3">
+            <a href="#home" class="hover:text-[#c89f63] transition">Home</a>
+            <a href="#menu" class="hover:text-[#c89f63] transition">Menu</a>
+            <a href="#about" class="hover:text-[#c89f63] transition">Tentang</a>
+            <a href="#contact" class="hover:text-[#c89f63] transition"
+              >Kontak</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-pattern py-16 md:py-24">
+      <div
+        class="container mx-auto px-4 flex flex-col md:flex-row items-center"
+      >
+        <div class="md:w-1/2 mb-10 md:mb-0">
+          <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[#5a3921]">
+            Nikmati Kenikmatan Kopi Terbaik
+          </h1>
+          <p class="text-lg mb-6 text-[#7d5d3f]">
+            Dibuat dengan biji kopi pilihan dan racikan terbaik oleh barista
+            profesional.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              href="#menu"
+              class="px-6 py-3 coffee-gradient text-white rounded-full font-semibold shadow-md hover:shadow-lg transition"
+              >Pesan Sekarang</a
+            >
+            <a
+              href="#about"
+              class="px-6 py-3 bg-white text-[#6f4e37] border border-[#6f4e37] rounded-full font-semibold hover:bg-[#f5f5f5] transition"
+              >Tentang Kami</a
+            >
+          </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <div class="relative">
+            <div
+              class="w-64 h-64 md:w-80 md:h-80 rounded-full coffee-gradient flex items-center justify-center shadow-xl"
+            >
+              <img
+                src="/public/images/logo.jpg"
+                alt="Cangkir kopi dengan latte art di atas meja kayu"
+                class="w-56 h-56 md:w-72 md:h-72 object-cover rounded-full"
+                loading="lazy"
+                rel="preload"
+              />
+            </div>
+            <div
+              class="absolute -bottom-4 -left-4 bg-white py-2 px-4 rounded-full shadow-md"
+            >
+              <p class="font-semibold text-sm">⭐ 4.9 (1.2k Reviews)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#5a3921]">
+            Menu Andalan Kami
+          </h2>
+          <p class="text-lg text-[#7d5d3f] max-w-2xl mx-auto">
+            Temukan varian kopi terbaik yang cocok dengan selera Anda
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Coffee Item 1 -->
+          <div
+            class="coffee-card bg-[#faf7f2] rounded-xl overflow-hidden shadow-md transition"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="public/images/menu.jpg"
+                alt="Espresso dalam cangkir kecil dengan crema di atasnya"
+                class="w-full h-full object-contain"
+                loading="lazy"
+                rel="preload"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold">Espresso</h3>
+                <span class="text-lg font-semibold text-[#c89f63]"
+                  >Rp 18.000</span
+                >
+              </div>
+              <p class="text-[#7d5d3f] mb-4">
+                Kopi murni yang kuat dengan crema yang sempurna.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('espresso', -1)"
+                  >
+                    -
+                  </button>
+                  <span id="espresso-quantity" class="font-semibold">0</span>
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('espresso', 1)"
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  class="add-to-cart bg-[#c89f63] text-white py-2 px-4 rounded-full text-sm font-semibold"
+                  onclick="addToCart('Espresso', 18000, 'espresso')"
+                >
+                  Tambahkan
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coffee Item 2 -->
+          <div
+            class="coffee-card bg-[#faf7f2] rounded-xl overflow-hidden shadow-md transition"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="/public/images/menu2.jpg"
+                alt="Cappuccino dengan busa sempurna dan taburan bubuk kakao"
+                class="w-full h-full object-contain"
+                loading="lazy"
+                rel="preload"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold">Cappuccino</h3>
+                <span class="text-lg font-semibold text-[#c89f63]"
+                  >Rp 25.000</span
+                >
+              </div>
+              <p class="text-[#7d5d3f] mb-4">
+                Perpaduan espresso, susu steamed, dan busa susu yang lembut.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('cappuccino', -1)"
+                  >
+                    -
+                  </button>
+                  <span id="cappuccino-quantity" class="font-semibold">0</span>
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('cappuccino', 1)"
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  class="add-to-cart bg-[#c89f63] text-white py-2 px-4 rounded-full text-sm font-semibold"
+                  onclick="addToCart('Cappuccino', 25000, 'cappuccino')"
+                >
+                  Tambahkan
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coffee Item 3 -->
+          <div
+            class="coffee-card bg-[#faf7f2] rounded-xl overflow-hidden shadow-md transition"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="/public/images/menu3.jpg"
+                alt="Kopi latte art dengan pola hati dalam cangkir putih"
+                class="w-full h-full object-contain"
+                loading="lazy"
+                rel="preload"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold">Latte</h3>
+                <span class="text-lg font-semibold text-[#c89f63]"
+                  >Rp 27.000</span
+                >
+              </div>
+              <p class="text-[#7d5d3f] mb-4">
+                Espresso dengan lebih banyak susu steamed dan lapisan busa
+                tipis.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('latte', -1)"
+                  >
+                    -
+                  </button>
+                  <span id="latte-quantity" class="font-semibold">0</span>
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('latte', 1)"
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  class="add-to-cart bg-[#c89f63] text-white py-2 px-4 rounded-full text-sm font-semibold"
+                  onclick="addToCart('Latte', 27000, 'latte')"
+                >
+                  Tambahkan
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coffee Item 4 -->
+          <div
+            class="coffee-card bg-[#faf7f2] rounded-xl overflow-hidden shadow-md transition"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="/public/images/menu4.jpg"
+                alt="Cold brew coffee dalam gelas dengan es batu"
+                class="w-full h-full object-contain"
+                loading="lazy"
+                rel="preload"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold">Cold Brew</h3>
+                <span class="text-lg font-semibold text-[#c89f63]"
+                  >Rp 29.000</span
+                >
+              </div>
+              <p class="text-[#7d5d3f] mb-4">
+                Kopi yang diseduh dingin selama 12 jam untuk rasa yang halus.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('coldbrew', -1)"
+                  >
+                    -
+                  </button>
+                  <span id="coldbrew-quantity" class="font-semibold">0</span>
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('coldbrew', 1)"
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  class="add-to-cart bg-[#c89f63] text-white py-2 px-4 rounded-full text-sm font-semibold"
+                  onclick="addToCart('Cold Brew', 29000, 'coldbrew')"
+                >
+                  Tambahkan
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coffee Item 5 -->
+          <div
+            class="coffee-card bg-[#faf7f2] rounded-xl overflow-hidden shadow-md transition"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="/public/images/menu5.jpg"
+                alt="Matcha latte dalam gelas dengan warna hijau yang indah"
+                class="w-full h-full object-contain"
+                loading="lazy"
+                rel="preload"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold">Matcha Latte</h3>
+                <span class="text-lg font-semibold text-[#c89f63]"
+                  >Rp 30.000</span
+                >
+              </div>
+              <p class="text-[#7d5d3f] mb-4">
+                Perpaduan matcha Jepang premium dengan susu steamed.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('matcha', -1)"
+                  >
+                    -
+                  </button>
+                  <span id="matcha-quantity" class="font-semibold">0</span>
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('matcha', 1)"
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  class="add-to-cart bg-[#c89f63] text-white py-2 px-4 rounded-full text-sm font-semibold"
+                  onclick="addToCart('Matcha Latte', 30000, 'matcha')"
+                >
+                  Tambahkan
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coffee Item 6 -->
+          <div
+            class="coffee-card bg-[#faf7f2] rounded-xl overflow-hidden shadow-md transition"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="/public/images/menu6.jpg"
+                alt="Kopi Turki dalam pot tradisional tembaga"
+                class="w-full h-full object-contain"
+                loading="lazy"
+                rel="preload"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-xl font-bold">Kopi Turki</h3>
+                <span class="text-lg font-semibold text-[#c89f63]"
+                  >Rp 22.000</span
+                >
+              </div>
+              <p class="text-[#7d5d3f] mb-4">
+                Kopi tradisional Turki dengan metode penyeduhan khusus.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('turkish', -1)"
+                  >
+                    -
+                  </button>
+                  <span id="turkish-quantity" class="font-semibold">0</span>
+                  <button
+                    class="text-[#6f4e37] border border-[#6f4e37] rounded-full w-7 h-7 flex items-center justify-center"
+                    onclick="updateQuantity('turkish', 1)"
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  class="add-to-cart bg-[#c89f63] text-white py-2 px-4 rounded-full text-sm font-semibold"
+                  onclick="addToCart('Kopi Turki', 22000, 'turkish')"
+                >
+                  Tambahkan
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 hero-pattern">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 mb-10 md:mb-0">
+            <img
+              src="/public/images/logo2.jpg"
+              alt="Interior modern kedai kopi dengan tempat duduk yang nyaman"
+              class="rounded-xl shadow-lg w-full"
+              loading="lazy"
+              rel="preload"
+            />
+          </div>
+          <div class="md:w-1/2 md:pl-12">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-[#5a3921]">
+              Tentang CoffeeSruduk
+            </h2>
+            <p class="text-lg mb-4 text-[#7d5d3f]">
+              KopiNako hadir sejak 2015 dengan misi menyajikan pengalaman
+              menikmati kopi terbaik untuk para pecinta kopi di Indonesia.
+            </p>
+            <p class="text-lg mb-6 text-[#7d5d3f]">
+              Kami menggunakan biji kopi pilihan dari perkebunan lokal dan impor
+              yang melalui proses roasting khusus untuk menghasilkan cita rasa
+              yang khas.
+            </p>
+
+            <div class="grid grid-cols-2 gap-6 mb-6">
+              <div class="flex items-center">
+                <div
+                  class="w-12 h-12 rounded-full coffee-gradient flex items-center justify-center text-white mr-3"
+                >
+                  <i class="fas fa-coffee"></i>
+                </div>
+                <div>
+                  <h3 class="font-semibold">100+ Varian Kopi</h3>
+                  <p class="text-sm text-[#7d5d3f]">Pilihan terbaik</p>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="w-12 h-12 rounded-full coffee-gradient flex items-center justify-center text-white mr-3"
+                >
+                  <i class="fas fa-award"></i>
+                </div>
+                <div>
+                  <h3 class="font-semibold">Barista Profesional</h3>
+                  <p class="text-sm text-[#7d5d3f]">Bersertifikat</p>
+                </div>
+              </div>
+            </div>
+
+            <a
+              href="#contact"
+              class="inline-block px-6 py-3 coffee-gradient text-white rounded-full font-semibold shadow-md hover:shadow-lg transition"
+              >Hubungi Kami</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#5a3921]">
+            Apa Kata Pelanggan
+          </h2>
+          <p class="text-lg text-[#7d5d3f] max-w-2xl mx-auto">
+            Testimoni dari pelanggan setia CoffeeSruduk
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-[#faf7f2] p-6 rounded-xl shadow-md">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                <img
+                  src="https://placeholder-image-service.onrender.com/image/100x100?prompt=Portrait of a young smiling Indonesian woman&id=f593af9d-d91c-4d29-bb02-7e63ba123205"
+                  alt="Potret wanita Indonesia muda yang sedang tersenyum"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  rel="preload"
+                />
+              </div>
+              <div>
+                <h3 class="font-semibold">Rina Susanti</h3>
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p class="text-[#7d5d3f]">
+              "Kopi di sini selalu fresh dan aromanya nikmat. Pelayanannya juga
+              ramah dan cepat. Favorite spot buat nongkrong!"
+            </p>
+          </div>
+
+          <div class="bg-[#faf7f2] p-6 rounded-xl shadow-md">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                <img
+                  src="https://placeholder-image-service.onrender.com/image/100x100?prompt=Portrait of a young Indonesian man with glasses&id=f593af9d-d91c-4d29-bb02-7e63ba123205"
+                  alt="Potret pria Indonesia muda berkacamata"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  rel="preload"
+                />
+              </div>
+              <div>
+                <h3 class="font-semibold">Budi Santoso</h3>
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p class="text-[#7d5d3f]">
+              "Sebagai pecinta kopi, saya sangat appreciate kualitas kopi di
+              sini. Cold brew-nya是最棒! Sudah langganan lebih dari setahun."
+            </p>
+          </div>
+
+          <div class="bg-[#faf7f2] p-6 rounded-xl shadow-md">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                <img
+                  src="https://placeholder-image-service.onrender.com/image/100x100?prompt=Portrait of a middle aged Indonesian businesswoman&id=f593af9d-d91c-4d29-bb02-7e63ba123205"
+                  alt="Potret wanita bisnis Indonesia setengah baya"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  rel="preload"
+                />
+              </div>
+              <div>
+                <h3 class="font-semibold">Dewi Anggraeni</h3>
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+            <p class="text-[#7d5d3f]">
+              "Tempat yang nyaman untuk meeting klain. Wi-Fi-nya kencang,
+              kopinya enak, dan ada banyak outlet充电. Highly recommended!"
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 hero-pattern">
+      <div class="container mx-auto px-4">
+        <div
+          class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden"
+        >
+          <div class="md:flex">
+            <div class="md:w-1/2 coffee-gradient text-white p-8">
+              <h2 class="text-2xl font-bold mb-6">Kontak Kami</h2>
+
+              <div class="mb-6">
+                <h3 class="font-semibold mb-2">
+                  <i class="fas fa-map-marker-alt mr-2"></i> Alamat
+                </h3>
+                <p>Jl. Kopi Mantap No. 123, Jakarta Selatan</p>
+              </div>
+
+              <div class="mb-6">
+                <h3 class="font-semibold mb-2">
+                  <i class="fas fa-phone mr-2"></i> Telepon
+                </h3>
+                <p>+62 21 1234 5678</p>
+              </div>
+
+              <div class="mb-6">
+                <h3 class="font-semibold mb-2">
+                  <i class="fas fa-envelope mr-2"></i> Email
+                </h3>
+                <p>hello@coffeesruduk.com</p>
+              </div>
+
+              <div>
+                <h3 class="font-semibold mb-2">
+                  <i class="fas fa-clock mr-2"></i> Jam Operasional
+                </h3>
+                <p>Senin - Minggu: 07:00 - 22:00 WIB</p>
+              </div>
+            </div>
+
+            <div class="md:w-1/2 p-8">
+              <h2 class="text-2xl font-bold mb-6 text-[#5a3921]">
+                Kirim Pesan
+              </h2>
+              <form id="contactForm">
+                <div class="mb-4">
+                  <label class="block text-[#5a3921] mb-2" for="name"
+                    >Nama Lengkap</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    class="w-full px-4 py-2 border border-[#c89f63] rounded-md focus:outline-none focus:ring-2 focus:ring-[#6f4e37]"
+                  />
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-[#5a3921] mb-2" for="email"
+                    >Email</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    class="w-full px-4 py-2 border border-[#c89f63] rounded-md focus:outline-none focus:ring-2 focus:ring-[#6f4e37]"
+                  />
+                </div>
+
+                <div class="mb-4">
+                  <label class="block text-[#5a3921] mb-2" for="message"
+                    >Pesan</label
+                  >
+                  <textarea
+                    id="message"
+                    rows="4"
+                    class="w-full px-4 py-2 border border-[#c89f63] rounded-md focus:outline-none focus:ring-2 focus:ring-[#6f4e37]"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full coffee-gradient text-white py-3 rounded-md font-semibold hover:shadow-md transition"
+                >
+                  Kirim Pesan
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#5a3921] text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center mb-4">
+              <div
+                class="w-10 h-10 rounded-full coffee-gradient flex items-center justify-center text-white mr-2"
+              >
+                <i class="fas fa-coffee"></i>
+              </div>
+              <span class="text-xl font-bold">CoffeeSruduk</span>
+            </div>
+            <p class="mb-4">
+              Menghadirkan kenikmatan kopi terbaik untuk setiap momen spesial
+              Anda.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-white hover:text-[#c89f63] transition"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-white hover:text-[#c89f63] transition"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" class="text-white hover:text-[#c89f63] transition"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-white hover:text-[#c89f63] transition"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Tautan Cepat</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#home" class="hover:text-[#c89f63] transition">Home</a>
+              </li>
+              <li>
+                <a href="#menu" class="hover:text-[#c89f63] transition">Menu</a>
+              </li>
+              <li>
+                <a href="#about" class="hover:text-[#c89f63] transition"
+                  >Tentang Kami</a
+                >
+              </li>
+              <li>
+                <a href="#contact" class="hover:text-[#c89f63] transition"
+                  >Kontak</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Layanan</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="hover:text-[#c89f63] transition"
+                  >Pemesanan Online</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-[#c89f63] transition">Catering</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-[#c89f63] transition"
+                  >Private Event</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-[#c89f63] transition"
+                  >Coffee Workshop</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Berlangganan</h3>
+            <p class="mb-4">Dapatkan info promo dan menu terbaru</p>
+            <div class="flex">
+              <input
+                type="email"
+                placeholder="Email Anda"
+                class="px-4 py-2 rounded-l-md w-full text-[#5a3921]"
+              />
+              <button class="coffee-gradient px-4 py-2 rounded-r-md">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-[#7d5d3f] mt-8 pt-8 text-center">
+          <p>&copy; 2023 CoffeeSruduk. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden"
+      id="cartModal"
+    >
+      <div
+        class="absolute right-0 top-0 h-full w-full md:w-96 bg-white shadow-lg overflow-y-auto"
+      >
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold">Keranjang Belanja</h2>
+            <button id="closeCart">
+              <i class="fas fa-times text-xl"></i>
+            </button>
+          </div>
+
+          <div id="cartItems" class="mb-6">
+            <!-- Cart items will be dynamically added here -->
+            <p class="text-center py-8 text-[#7d5d3f]" id="emptyCart">
+              Keranjang belanja kosong
+            </p>
+          </div>
+
+          <div class="border-t pt-4 mb-6">
+            <div class="flex justify-between mb-2">
+              <span>Subtotal</span>
+              <span id="cartSubtotal">Rp 0</span>
+            </div>
+            <div class="flex justify-between mb-4">
+              <span>Pajak (10%)</span>
+              <span id="cartTax">Rp 0</span>
+            </div>
+            <div class="flex justify-between font-bold text-lg">
+              <span>Total</span>
+              <span id="cartTotal">Rp 0</span>
+            </div>
+          </div>
+
+          <button
+            class="w-full coffee-gradient text-white py-3 rounded-md font-semibold mb-4"
+          >
+            Checkout
+          </button>
+          <button
+            class="w-full border border-[#6f4e37] text-[#6f4e37] py-3 rounded-md font-semibold"
+            id="continueShopping"
+          >
+            Lanjutkan Belanja
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/public/script.js"></script>
+  </body>
+</html>
